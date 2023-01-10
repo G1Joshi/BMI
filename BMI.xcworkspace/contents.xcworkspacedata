@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:BMI Storyboard/BMI Storyboard.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:BMI Programmatic/BMI Programmatic.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:BMI SwiftUI/BMI SwiftUI.xcodeproj">
+   </FileRef>
+</Workspace>
