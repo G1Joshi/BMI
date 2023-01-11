@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Calculate View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BMI_Storyboard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CalculateViewController" customModule="BMI_Storyboard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -56,6 +56,9 @@
                                         </constraints>
                                         <color key="minimumTrackTintColor" name="Background"/>
                                         <color key="thumbTintColor" name="Background"/>
+                                        <connections>
+                                            <action selector="heightSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="5WN-ak-4aG"/>
+                                        </connections>
                                     </slider>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Gx0-AE-c9S">
                                         <rect key="frame" x="0.0" y="674" width="390" height="25"/>
@@ -84,6 +87,9 @@
                                         </constraints>
                                         <color key="minimumTrackTintColor" name="Background"/>
                                         <color key="thumbTintColor" name="Background"/>
+                                        <connections>
+                                            <action selector="weightSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="AWl-Dh-6N6"/>
+                                        </connections>
                                     </slider>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RxU-Fn-keF">
                                         <rect key="frame" x="0.0" y="779" width="390" height="60"/>
@@ -96,6 +102,9 @@
                                         <state key="normal" title="CALCULATE">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="calculateResult:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tb7-Iz-IYO"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -113,24 +122,29 @@
                             <constraint firstAttribute="bottom" secondItem="8r9-Fl-QtK" secondAttribute="bottom" id="oku-Ui-V29"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="heightLabel" destination="riP-Dp-JmS" id="BlA-lh-7YP"/>
+                        <outlet property="weightLabel" destination="MK3-L1-utW" id="Fms-Wx-qtW"/>
+                        <segue destination="Dbm-X6-Bwx" kind="presentation" identifier="goToResult" id="4pB-fI-YCG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="138" y="4"/>
         </scene>
-        <!--View Controller-->
+        <!--Result View Controller-->
         <scene sceneID="6MO-2r-335">
             <objects>
-                <viewController id="Dbm-X6-Bwx" customClass="ViewController" customModule="BMI_Storyboard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Dbm-X6-Bwx" customClass="ResultViewController" customModule="BMI_Storyboard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SYG-8e-cxB">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="863"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="result_background" translatesAutoresizingMaskIntoConstraints="NO" id="sPm-nY-qFJ">
-                                <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                                <rect key="frame" x="0.0" y="0.0" width="430" height="863"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kgv-RM-jEZ">
-                                <rect key="frame" x="88.333333333333329" y="360.33333333333331" width="253.33333333333337" height="211.66666666666669"/>
+                                <rect key="frame" x="88.333333333333329" y="325.66666666666669" width="253.33333333333337" height="211.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOUR RESULT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRD-OX-ccS" userLabel="YOUR RESULT">
                                         <rect key="frame" x="0.0" y="0.0" width="253.33333333333334" height="48"/>
@@ -145,7 +159,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Normal" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vka-Ku-b55">
-                                        <rect key="frame" x="0.0" y="163.66666666666669" width="253.33333333333334" height="48"/>
+                                        <rect key="frame" x="0.0" y="163.66666666666663" width="253.33333333333334" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -153,7 +167,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLL-cR-YYN">
-                                <rect key="frame" x="20" y="838" width="390" height="60"/>
+                                <rect key="frame" x="20" y="803" width="390" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="kWy-Q6-Vn0"/>
@@ -163,6 +177,9 @@
                                 <state key="normal" title="RECALCULATE">
                                     <color key="titleColor" name="Background"/>
                                 </state>
+                                <connections>
+                                    <action selector="recalculateBmi:" destination="Dbm-X6-Bwx" eventType="touchUpInside" id="ScE-Pc-HKX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LsU-cw-ue5"/>
@@ -179,6 +196,10 @@
                             <constraint firstAttribute="bottom" secondItem="sPm-nY-qFJ" secondAttribute="bottom" id="vTd-nm-dNu"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="resultDescription" destination="vka-Ku-b55" id="oJT-iX-wGr"/>
+                        <outlet property="resultValue" destination="b5t-eU-zr2" id="4ka-Er-f3o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kic-DN-DNW" sceneMemberID="firstResponder"/>
             </objects>
@@ -189,7 +210,7 @@
         <image name="calculate_background" width="375" height="812"/>
         <image name="result_background" width="375" height="812"/>
         <namedColor name="Background">
-            <color red="0.38039215686274508" green="0.37647058823529411" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.37999999523162842" green="0.37599998712539673" blue="0.60000002384185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
