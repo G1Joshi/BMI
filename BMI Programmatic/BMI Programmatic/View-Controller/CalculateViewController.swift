@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CalculateViewController.swift
 //  BMI Programmatic
 //
 //  Created by Jeevan Chandra Joshi on 10/01/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculateViewController: UIViewController {
     let background = UIImageView()
     let stackView = UIStackView()
     let labelView = UILabel()
@@ -20,6 +20,9 @@ class ViewController: UIViewController {
     let weightValueLabel = UILabel()
     let weightSlider = UISlider()
     let calculateButton = UIButton()
+
+    var bmi = BMI()
+    var height: Float = 1.5, weight: Float = 100.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,10 +64,11 @@ class ViewController: UIViewController {
         heightStackView.alignment = .fill
         heightStackView.distribution = .equalSpacing
 
-        heightSlider.value = 0.5
-        heightSlider.maximumValue = 1
+        heightSlider.value = 1.5
+        heightSlider.maximumValue = 3
         heightSlider.minimumTrackTintColor = UIColor(named: "Background")
         heightSlider.thumbTintColor = UIColor(named: "Background")
+        heightSlider.addTarget(self, action: #selector(heightChanged), for: .valueChanged)
 
         heightLabel.text = "Height"
         heightLabel.font = .systemFont(ofSize: 20)
@@ -78,10 +82,11 @@ class ViewController: UIViewController {
         weightStackView.alignment = .fill
         weightStackView.distribution = .equalSpacing
 
-        weightSlider.value = 0.5
-        weightSlider.maximumValue = 1
+        weightSlider.value = 100
+        weightSlider.maximumValue = 200
         weightSlider.minimumTrackTintColor = UIColor(named: "Background")
         weightSlider.thumbTintColor = UIColor(named: "Background")
+        weightSlider.addTarget(self, action: #selector(weightChanged), for: .valueChanged)
 
         weightLabel.text = "Weight"
         weightLabel.font = .systemFont(ofSize: 20)
@@ -95,6 +100,12 @@ class ViewController: UIViewController {
         calculateButton.setTitleColor(.white, for: .normal)
         calculateButton.titleLabel?.font = .systemFont(ofSize: 20)
         calculateButton.backgroundColor = UIColor(named: "Background")
+        calculateButton.addAction(UIAction(handler: { [self] _ in
+            bmi.calculate(height: height, weight: weight)
+            let resultViewController = ResultViewController()
+            resultViewController.bmi = bmi
+            present(resultViewController, animated: true)
+        }), for: .touchUpInside)
     }
 
     func setupConstraint() {
@@ -120,5 +131,15 @@ class ViewController: UIViewController {
 
             calculateButton.heightAnchor.constraint(equalToConstant: 60),
         ])
+    }
+
+    @objc func heightChanged(_ sender: UISlider) {
+        height = sender.value
+        heightValueLabel.text = String(format: "%.2fm", sender.value)
+    }
+
+    @objc func weightChanged(_ sender: UISlider) {
+        weight = sender.value
+        weightValueLabel.text = String(format: "%.0fkg", sender.value)
     }
 }

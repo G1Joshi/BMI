@@ -15,10 +15,15 @@ class ResultViewController: UIViewController {
     let descriptionView = UILabel()
     let recalculateButton = UIButton()
 
+    var bmi: BMI?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupResultUi()
         setupResultConstraint()
+        view.backgroundColor = bmi?.color
+        resultValueView.text = String(format: "%.1f", bmi?.value ?? 0)
+        descriptionView.text = bmi?.description
     }
 
     func setupResultUi() {
@@ -59,6 +64,9 @@ class ResultViewController: UIViewController {
         recalculateButton.setTitleColor(UIColor(named: "Background"), for: .normal)
         recalculateButton.titleLabel?.font = .systemFont(ofSize: 20)
         recalculateButton.backgroundColor = .white
+        recalculateButton.addAction(UIAction(handler: { [self] _ in
+            dismiss(animated: true)
+        }), for: .touchUpInside)
     }
 
     func setupResultConstraint() {
